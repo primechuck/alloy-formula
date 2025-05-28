@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-grafana-alloy:
+alloy:
   lookup:
     master: template-master
     # Just for testing purposes
@@ -45,9 +45,9 @@ grafana-alloy:
 
     # For testing purposes
     source_files:
-      grafana-alloy-config-file-file-managed:
+      alloy-config-file-file-managed:
         - 'example.tmpl.jinja'
-      grafana-alloy-subcomponent-config-file-file-managed:
+      alloy-subcomponent-config-file-file-managed:
         - 'subcomponent-example.tmpl.jinja'
 
   # Just for testing purposes

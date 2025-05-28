@@ -1,6 +1,6 @@
 module.exports = {
   branch: 'master',
-  repositoryUrl: 'https://github.com/saltstack-formulas/grafana-alloy-formula',
+  repositoryUrl: 'https://github.com/saltstack-formulas/alloy-formula',
   plugins: [
       ['@semantic-release/commit-analyzer', {
         preset: 'angular',

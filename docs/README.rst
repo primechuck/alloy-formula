@@ -1,14 +1,14 @@
 .. _readme:
 
-grafana-alloy-formula
+alloy-formula
 =====================
 
 |img_travis| |img_sr| |img_pc|
 
-.. |img_travis| image:: https://travis-ci.com/saltstack-formulas/grafana-alloy-formula.svg?branch=master
+.. |img_travis| image:: https://travis-ci.com/saltstack-formulas/alloy-formula.svg?branch=master
    :alt: Travis CI Build Status
    :scale: 100%
-   :target: https://travis-ci.com/saltstack-formulas/grafana-alloy-formula
+   :target: https://travis-ci.com/saltstack-formulas/alloy-formula
 .. |img_sr| image:: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
    :alt: Semantic Release
    :scale: 100%
@@ -76,79 +76,79 @@ Available states
 .. contents::
    :local:
 
-``grafana-alloy``
+``alloy``
 ^^^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
-This installs the grafana-alloy package,
-manages the grafana-alloy configuration file and then
-starts the associated grafana-alloy service.
+This installs the alloy package,
+manages the alloy configuration file and then
+starts the associated alloy service.
 
-``grafana-alloy.package``
+``alloy.package``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will install the grafana-alloy package only.
+This state will install the alloy package only.
 
-``grafana-alloy.config``
+``alloy.config``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will configure the grafana-alloy service and has a dependency on ``grafana-alloy.install``
+This state will configure the alloy service and has a dependency on ``alloy.install``
 via include list.
 
-``grafana-alloy.service``
+``alloy.service``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will start the grafana-alloy service and has a dependency on ``grafana-alloy.config``
+This state will start the alloy service and has a dependency on ``alloy.config``
 via include list.
 
-``grafana-alloy.clean``
+``alloy.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
-this state will undo everything performed in the ``grafana-alloy`` meta-state in reverse order, i.e.
+this state will undo everything performed in the ``alloy`` meta-state in reverse order, i.e.
 stops the service,
 removes the configuration file and
 then uninstalls the package.
 
-``grafana-alloy.service.clean``
+``alloy.service.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will stop the grafana-alloy service and disable it at boot time.
+This state will stop the alloy service and disable it at boot time.
 
-``grafana-alloy.config.clean``
+``alloy.config.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the configuration of the grafana-alloy service and has a
-dependency on ``grafana-alloy.service.clean`` via include list.
+This state will remove the configuration of the alloy service and has a
+dependency on ``alloy.service.clean`` via include list.
 
-``grafana-alloy.package.clean``
+``alloy.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the grafana-alloy package and has a depency on
-``grafana-alloy.config.clean`` via include list.
+This state will remove the alloy package and has a depency on
+``alloy.config.clean`` via include list.
 
-``grafana-alloy.subcomponent``
+``alloy.subcomponent``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
 This state installs a subcomponent configuration file before
-configuring and starting the grafana-alloy service.
+configuring and starting the alloy service.
 
-``grafana-alloy.subcomponent.config``
+``alloy.subcomponent.config``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will configure the grafana-alloy subcomponent and has a
-dependency on ``grafana-alloy.config`` via include list.
+This state will configure the alloy subcomponent and has a
+dependency on ``alloy.config`` via include list.
 
-``grafana-alloy.subcomponent.config.clean``
+``alloy.subcomponent.config.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the configuration of the grafana-alloy subcomponent
-and reload the grafana-alloy service by a dependency on
-``grafana-alloy.service.running`` via include list and ``watch_in``
+This state will remove the configuration of the alloy subcomponent
+and reload the alloy service by a dependency on
+``alloy.service.running`` via include list and ``watch_in``
 requisite.
 
 Testing
@@ -174,7 +174,7 @@ e.g. ``debian-9-2019-2-py3``.
 ``bin/kitchen converge``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates the docker instance and runs the ``grafana-alloy`` main state, ready for testing.
+Creates the docker instance and runs the ``alloy`` main state, ready for testing.
 
 ``bin/kitchen verify``
 ^^^^^^^^^^^^^^^^^^^^^^

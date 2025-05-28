@@ -3,7 +3,7 @@
 # Prepare platform "finger"
 platform_finger = system.platform[:finger].split('.').first.to_s
 
-control 'grafana-alloy.service.running' do
+control 'alloy.service.running' do
   title 'The service should be installed, enabled and running'
 
   # Override by `platform_finger`

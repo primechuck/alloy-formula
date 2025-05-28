@@ -17,8 +17,8 @@ values:
     - Y:G@os_family
     - Y:G@os
     - Y:G@osfinger
-    - C@grafana-alloy:lookup
-    - C@grafana-alloy
+    - C@alloy:lookup
+    - C@alloy
     - Y:G@id
   master: template-master
   pkg:
@@ -27,7 +27,7 @@ values:
   service:
     name: crond
   subcomponent:
-    config: /etc/grafana-alloy-subcomponent-formula.conf
+    config: /etc/alloy-subcomponent-formula.conf
   tofs:
     files_switch:
     - any/path/can/be/used/here
@@ -37,8 +37,8 @@ values:
     - os
     - os_family
     source_files:
-      grafana-alloy-config-file-file-managed:
+      alloy-config-file-file-managed:
       - example.tmpl.jinja
-      grafana-alloy-subcomponent-config-file-file-managed:
+      alloy-subcomponent-config-file-file-managed:
       - subcomponent-example.tmpl.jinja
   winner: pillar

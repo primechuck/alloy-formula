@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-control 'grafana-alloy._mapdata' do
+control 'alloy._mapdata' do
   title '`map.jinja` should match the reference file'
 
   ### Method

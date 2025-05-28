@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-control 'grafana-alloy.config.file' do
+control 'alloy.config.file' do
   title 'Verify the configuration file'
 
   describe file('/etc/template-formula.conf') do
@@ -26,8 +26,8 @@ control 'grafana-alloy.config.file' do
       should include(
         '"tofs": {"files_switch": ["any/path/can/be/used/here", "id", ' \
         '"roles", "osfinger", "os", "os_family"], "source_files": ' \
-        '{"grafana-alloy-config-file-file-managed": ["example.tmpl.jinja"], ' \
-        '"grafana-alloy-subcomponent-config-file-file-managed": ' \
+        '{"alloy-config-file-file-managed": ["example.tmpl.jinja"], ' \
+        '"alloy-subcomponent-config-file-file-managed": ' \
         '["subcomponent-example.tmpl.jinja"]}'
       )
       # rubocop:enable Layout/LineLength

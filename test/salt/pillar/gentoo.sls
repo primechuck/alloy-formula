@@ -3,7 +3,7 @@
 ---
 portage:
   sync_wait_one_day: true
-grafana-alloy:
+alloy:
   pkg:
     name: 'app-shells/bash'
   service:

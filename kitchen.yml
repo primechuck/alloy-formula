@@ -13,7 +13,7 @@ provisioner:
   log_level: debug
   salt_install: none
   require_chef: false
-  formula: grafana-alloy
+  formula: alloy
   salt_copy_filter:
     - .kitchen
     - .git
@@ -265,8 +265,8 @@ suites:
       state_top:
         base:
           '*':
-            - grafana-alloy._mapdata
-            - grafana-alloy
+            - alloy._mapdata
+            - alloy
     verifier:
       inspec_tests:
         - path: test/integration/default
