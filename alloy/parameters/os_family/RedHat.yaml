@@ -12,7 +12,14 @@
 # values: {}
 ---
 values:
-  pkg:
-    name: alloy-redhat
-  config: /etc/alloy.conf
+  pkg: alloy
+  service: alloy
+  user: alloy
+  group: alloy
+  config_file: '/etc/alloy/config.alloy'
+  repo:
+    file: '/etc/yum.repos.d/grafana.repo'
+    humanname: Grafana
+    baseurl: https://rpm.grafana.com
+    gpgkey: https://rpm.grafana.com/gpg.key
 ...

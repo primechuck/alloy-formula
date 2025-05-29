@@ -10,8 +10,6 @@ values:
   config: '/etc/alloy'
   service:
     name: alloy
-  subcomponent:
-    config: '/etc/alloy-subcomponent-formula.conf'
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults

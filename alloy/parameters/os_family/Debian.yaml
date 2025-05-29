@@ -12,7 +12,15 @@
 # values: {}
 ---
 values:
-  pkg:
-    name: alloy-debian
-  config: /etc/alloy.d/custom.conf
+  pkg: alloy
+  service: alloy
+  user: alloy
+  group: alloy
+  config_file: '/etc/alloy/config.alloy'
+  repo:
+    file: '/etc/apt/sources.list.d/grafana.list'
+    # trunk-ignore(yamllint/line-length)
+    line: 'deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main'
+    key_url: 'https://apt.grafana.com/gpg.key'
+
 ...
