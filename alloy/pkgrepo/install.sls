@@ -7,21 +7,20 @@
 
 
 alloy-repo-installed:
-  pkg.managed:
+  pkgrepo.managed:
     {% if salt['grains.get']('os_family') == 'Debian' %}
-    - name: {{ alloy_map.repo.line }}
-    - file: {{ alloy_map.repo.file }}
-    - key_url: {{ alloy_map.repo.key_url }}
+    - name: {{ alloy.repo.line }}
+    - file: {{ alloy.repo.file }}
+    - key_url: {{ alloy.repo.key_url }}
     - refresh_db: True
     - gpgcheck: 1
 
-    {% elif salt['grains.get']('os_family') in ['RedHat'] %}
-    - humanname: {{ alloy_map.repo.humanname }}
-    - name: {{ alloy_map.repo.file }}
-    - baseurl: {{ alloy_map.repo.baseurl }}
-    - gpgkey: {{ alloy_map.repo.gpgkey }}
+    {% elif salt['grains.get']('os_family') in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
+    - humanname: {{ alloy.repo.humanname }}
+    - name: {{ alloy.repo.file }}
+    - baseurl: {{ alloy.repo.baseurl }}
+    - gpgkey: {{ alloy.repo.gpgkey }}
     - gpgcheck: 1
     - enabled: 1
     {% endif %}
-    - name: {{ alloy.pkgrepo.name }}
 

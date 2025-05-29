@@ -12,13 +12,6 @@
 # values: {}
 ---
 values:
-  pkg:
-    name: alloy
-  service:
-    name: alloy
-  user: alloy
-  group: alloy
-  config_file: '/etc/alloy/config.alloy'
   repo:
     file: '/etc/yum.repos.d/grafana.repo'
     humanname: Grafana

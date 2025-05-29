@@ -6,11 +6,11 @@
 values:
   pkg:
     name: alloy
-  rootgroup: root
-  config: '/etc/alloy'
   service:
     name: alloy
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
+  user: alloy
+  group: alloy
+  config_file: '/etc/alloy/config.alloy'
+  rootgroup: root
+  configpath: '/etc/alloy'
 ...

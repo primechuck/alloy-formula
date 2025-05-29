@@ -2,7 +2,8 @@
 # vim: ft=sls
 
 include:
+  - .pkgrepo
   - .package
   - .config
   - .service
-  - .subcomponent
+  # - .subcomponent
