@@ -12,14 +12,14 @@ include:
 
 alloy-config-file-file-managed:
   file.managed:
-    - name: {{ alloy.config }}
-    - source: {{ files_switch(['example.tmpl'],
+    - name: {{ alloy.config_file }}
+    - source: {{ files_switch(['config.alloy.jinja'],
                               lookup='alloy-config-file-file-managed'
                  )
               }}
-    - mode: 644
-    - user: root
-    - group: {{ alloy.rootgroup }}
+    - mode: '0644'
+    - user:  {{ alloy.user }}
+    - group: {{ alloy.group }}
     - makedirs: True
     - template: jinja
     - require:

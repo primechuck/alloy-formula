@@ -29,7 +29,8 @@
     )
     | load_yaml %}
 
-{%- set map_sources = _map_settings | traverse("values:sources") %}
+{%- set _map_sources_override = _map_settings | traverse("values:sources") %}
+{%- set map_sources = _map_sources_override if _map_sources_override is not none else map_sources %}
 {%- do salt["log.debug"](
       "map.jinja: load parameters from sources:\n"
       ~ map_sources

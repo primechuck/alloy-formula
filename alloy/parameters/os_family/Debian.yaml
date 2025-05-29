@@ -1,18 +1,32 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
-# Set values specific to:
-#   salt['config.get']('os_family') == Debian.
-#
-# You just need to add the key:values for this `os_family` that differ
-# from `defaults.yaml` + `<osarch>.yaml`.
-#
-# If you do not need to provide defaults via the `os_family` config,
-# you can remove this file or provide at least an empty dict, e.g.
-# values: {}
+# Debian-family-specific default values for the Alloy formula.
+# Used for Ubuntu 24.04+
 ---
 values:
+  paths:
+    install_dir: /usr/bin
+    config_dir: /etc/alloy
+  binary:
+    name: alloy
+  user: root
+  group: alloy
   pkg:
-    name: alloy-debian
-  config: /etc/alloy.d/custom.conf
-...
+    name: alloy
+    use_upstream_repo: true
+    repo:
+      humanname: Grafana repo for Alloy and Grafana
+      signed_by: /usr/share/keyrings/grafana.key
+      url: https://apt.grafana.com stable main
+      file: /etc/apt/sources.list.d/grafana.list
+      key_url: https://apt.grafana.com/gpg-full.key
+      key_path: /usr/share/keyrings/grafana.key
+  config_file: /etc/alloy/config.alloy
+  service:
+    name: alloy
+    enable: true
+    settings:
+      user: alloy
+      group: alloy
+      storage_path: /var/lib/alloy

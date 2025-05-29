@@ -65,7 +65,7 @@ Create the file ``/etc/salt/master.d/fileserver.conf`` and restart the ``master`
 
     # List of formulas I'm using
     gitfs_remotes:
-      - https://github.com/saltstack-formulas/template-formula.git:
+      - https://github.com/saltstack-formulas/alloy-formula.git:
         - base: v4.1.1
       - https://github.com/saltstack-formulas/openssh-formula.git:
         - base: v2.0.1
@@ -90,7 +90,7 @@ We create a configuration for the DNS domain ``example.net`` in ``/srv/salt/allo
 
     ---
     values:
-      config: /etc/template-formula-example-net.conf
+      config: /etc/alloy-example-net.conf
     ...
 
 We create another configuration for the DNS domain ``example.com`` in the Jinja YAML template ``/srv/salt/alloy/parameters/dns:domain/example.com.yaml.jinja``:
@@ -99,7 +99,7 @@ We create another configuration for the DNS domain ``example.com`` in the Jinja 
 
     ---
     values:
-      config: /etc/template-formula-{{ grains['os_family'] }}.conf
+      config: /etc/alloy-{{ grains['os_family'] }}.conf
     ...
 
 
@@ -125,7 +125,7 @@ We create a configuration for the role ``alloy/server`` in ``/srv/salt/alloy/par
 
     ---
     values:
-      config: /etc/template-formula-server.conf
+      config: /etc/alloy-server.conf
     ...
 
 We create another configuration for the role ``alloy/client`` in ``/srv/salt/alloy/parameters/roles/alloy/client.yaml``:
@@ -134,7 +134,7 @@ We create another configuration for the role ``alloy/client`` in ``/srv/salt/all
 
     ---
     values:
-      config: /etc/template-formula-client.conf
+      config: /etc/alloy-client.conf
     ...
 
 
@@ -383,8 +383,8 @@ For each configuration source defined, ``map.jinja`` will:
 
      - if the ``<KEY>`` can be looked up:
 
-       - load values from the YAML file named ``salt://{{ tplroot }}/paramaters/<KEY>/{{ salt['<QUERY_METHOD>']('<KEY>') }}.yaml`` if it exists
-       - load values from the Jinja2 YAML template file named ``salt://{{ tplroot }}/paramaters/<KEY>/{{ salt['<QUERY_METHOD>']('<KEY>') }}.yaml.jinja`` if it exists
+       - load values from the YAML file named ``salt://{{ tplroot }}/parameters/<KEY>/{{ salt'<QUERY_METHOD>' }}.yaml`` if it exists
+       - load values from the Jinja2 YAML template file named ``salt://{{ tplroot }}/parameters/<KEY>/{{ salt'<QUERY_METHOD>' }}.yaml.jinja`` if it exists
 
      - otherwise:
 
@@ -412,7 +412,7 @@ By default, no merging is done, the first value found is returned.
 Global view of the order of preferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To summarise, here is a complete example of the load order of formula configuration values for an ``AMD64`` ``Ubuntu 18.04`` minion named ``minion1.example.net`` for the ``libvirt`` formula:
+To summarise, here is a complete example of the load order of formula configuration values for an ``AMD64`` ``Ubuntu 18.04`` minion named ``minion1.example.net`` for the ``alloy`` formula:
 
 #. ``parameters/defaults.yaml``
 #. ``parameters/defaults.yaml.jinja``
@@ -470,7 +470,7 @@ Use formula configuration values in templates
 
 When you need to process salt templates, you should avoid calling `salt['config.get']`_ (or `salt['pillar.get']`_ and `salt['grains.get']`_) directly from the template. All the needed values should be available within the ``mapdata`` variable exported by ``map.jinja``.
 
-Here is an example based on `template-formula/alloy/config/file.sls`_:
+Here is an example based on a formula's ``config.sls`` state file:
 
 .. code-block:: sls
 
@@ -538,5 +538,4 @@ This ``sls`` file expose a ``alloy`` context variable to the jinja template whic
 .. _salt.slsutil.merge: https://docs.saltproject.io/en/latest/ref/modules/all/salt.modules.slsutil.html#salt.modules.slsutil.merge
 .. _traverse: https://docs.saltproject.io/en/latest/topics/jinja/index.html#traverse
 .. _salt-ssh: https://docs.saltproject.io/en/latest/topics/ssh/
-.. _template-formula/alloy/config/file.sls: https://github.com/saltstack-formulas/template-formula/blob/master/alloy/config/file.sls
 .. _bug 58726: https://github.com/saltstack/salt/issues/58726

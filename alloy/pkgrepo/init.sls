@@ -2,7 +2,4 @@
 # vim: ft=sls
 
 include:
-  - .pkgrepo
   - .install
-  - .config
-  - .service

@@ -1,0 +1,12 @@
+# Default values for the alloy formula
+
+alloy:
+  # Default to a package-based installation
+  install_method: package
+  pkg:
+    name: alloy
+  service:
+    name: alloy
+  config_path: /etc/alloy/config.alloy
+  user: root
+  # The root group is defined in osfamilymap.yaml

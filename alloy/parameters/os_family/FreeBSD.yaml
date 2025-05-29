@@ -1,16 +1,33 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
-# Set values specific to:
-#   salt['config.get']('os_family') == FreeBSD.
-#
-# You just need to add the key:values for this `os_family` that differ
-# from `defaults.yaml` + `<osarch>.yaml`.
-#
-# If you do not need to provide defaults via the `os_family` config,
-# you can remove this file or provide at least an empty dict, e.g.
-# values: {}
+# FreeBSD-specific default values for the Alloy formula.
 ---
 values:
-  rootgroup: wheel
-...
+
+    paths:
+      install_dir: /usr/local/bin
+      config_dir: /usr/local/etc/alloy
+    binary:
+      name: alloy
+    user: root
+    group: wheel
+    pkg:
+      name: alloy
+      use_upstream_repo: false
+    config_file: /usr/local/etc/alloy/config.alloy
+    service:
+      name: alloy
+      enable: true
+      settings:
+        alloy_enable: true
+        alloy_user: nobody
+        alloy_group: nobody
+        alloy_listen_address: :9200
+        alloy_storage_path: /usr/local/var/alloy
+    dl:
+      base_url: https://github.com/grafana/alloy/releases/download/
+      version_prefix: 'v1.9.1'
+      component_name: alloy-freebsd-{{ alloy.arch }}
+      archive_type: zip
+      checksum: 'sha256=ab297815141f957fae7c143dc211bd79afac69b1381ec6b5eafc89dceb9394ef'

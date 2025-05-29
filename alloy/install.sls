@@ -3,6 +3,6 @@
 
 include:
   - .pkgrepo
-  - .install
+  - .package
   - .config
   - .service

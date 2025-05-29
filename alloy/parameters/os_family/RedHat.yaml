@@ -1,18 +1,33 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
-# Set values specific to:
-#   salt['config.get']('os_family') == RedHat.
-#
-# You just need to add the key:values for this `os_family` that differ
-# from `defaults.yaml` + `<osarch>.yaml`.
-#
-# If you do not need to provide defaults via the `os_family` config,
-# you can remove this file or provide at least an empty dict, e.g.
-# values: {}
+# RedHat-family-specific default values for the Alloy formula.
 ---
 values:
+  paths:
+    install_dir: /usr/bin
+    config_dir: /etc/alloy
+  binary:
+    name: alloy
+  user: root
+  group: alloy
   pkg:
-    name: alloy-redhat
-  config: /etc/alloy.conf
+    name: alloy
+    use_upstream_repo: true
+    repo:
+      name: grafana
+      file: /etc/yum.repos.d/grafana.repo
+      baseurl: https://rpm.grafana.com
+      gpgkey: https://rpm.grafana.com/gpg.key
+      enabled: 1
+      gpgcheck: 1
+      repo_gpgcheck: 1
+  config_file: /etc/alloy/config.alloy
+  service:
+    name: alloy
+    enable: true
+    settings:
+      user: alloy
+      group: alloy
+      storage_path: /var/lib/alloy
 ...

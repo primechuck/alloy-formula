@@ -11,6 +11,6 @@ include:
 
 alloy-config-clean-file-absent:
   file.absent:
-    - name: {{ alloy.config }}
+    - name: {{ alloy.config_file }}
     - require:
       - sls: {{ sls_service_clean }}
