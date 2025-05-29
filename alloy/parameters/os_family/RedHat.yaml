@@ -12,8 +12,10 @@
 # values: {}
 ---
 values:
-  pkg: alloy
-  service: alloy
+  pkg:
+    name: alloy
+  service:
+    name: alloy
   user: alloy
   group: alloy
   config_file: '/etc/alloy/config.alloy'
