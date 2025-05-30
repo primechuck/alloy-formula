@@ -126,26 +126,6 @@ dependency on ``alloy.service.clean`` via include list.
 ``alloy.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This state will remove the alloy package and has a depency on
-``alloy.config.clean`` via include list.
-
-``alloy.subcomponent``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*Meta-state (This is a state that includes other states)*.
-
-This state installs a subcomponent configuration file before
-configuring and starting the alloy service.
-
-``alloy.subcomponent.config``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will configure the alloy subcomponent and has a
-dependency on ``alloy.config`` via include list.
-
-``alloy.subcomponent.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 This state will remove the configuration of the alloy subcomponent
 and reload the alloy service by a dependency on
 ``alloy.service.running`` via include list and ``watch_in``

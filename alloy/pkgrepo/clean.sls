@@ -9,8 +9,12 @@
 include:
   - {{ sls_config_clean }}
 
-alloy-package-clean-pkg-removed:
-  pkg.removed:
-    - name: {{ alloy.pkg.name }}
+alloy-repo-installed:
+  pkgrepo.absent:
+    {% if salt['grains.get']('os_family') == 'Debian' %}
+    - name: {{ alloy.repo.line }}
+    {% elif salt['grains.get']('os_family') in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
+    - name: {{ alloy.repo.file }}
+    {% endif %}
     - require:
       - sls: {{ sls_config_clean }}
