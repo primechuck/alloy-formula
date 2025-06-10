@@ -13,8 +13,9 @@
 ---
 values:
   repo:
+    keyring_path: '/etc/apt/keyrings/grafana.gpg'
     file: '/etc/apt/sources.list.d/grafana.list'
-    # trunk-ignore(yamllint/line-length)
-    line: 'deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main'
+    line: 'https://apt.grafana.com stable main'
     key_url: 'https://apt.grafana.com/gpg.key'
+    key_source_hash: 'sha256=58052c148058ace26dbd01ce057afa5709fb9d39c8a8ab16800be3f42fc02ab2'
 ...
