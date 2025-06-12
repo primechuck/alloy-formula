@@ -16,8 +16,8 @@
   {%- set target_arch = 'arm64' %}
 {%- endif %}
 
-{%- if os_family in ['Debian', 'RedHat', 'Fedora', 'Oracle', 'SUSE'] %}  
-  {%- if target_arch in ['amd64', 'arm64'] %}  
+{%- if os_family in ['Debian', 'RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
+  {%- if target_arch in ['amd64', 'arm64'] %}
     {%- if os_family == 'Debian' %}
       {%- set keyring_dir = salt['file.dirname'](alloy.repo.keyring_path) %}
 
