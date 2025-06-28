@@ -11,12 +11,17 @@
 {%- set raw_cpu_arch = salt['grains.get']('cpuarch') %}
 
 {%- if os_family in ['Debian', 'RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
-  {%- if target_arch in ['amd64', 'arm64'] %}
+{# Normalize architecture for Grafana's supported amd64/arm64 #}
+{%- set target_arch = '' %}
+{%- if raw_cpu_arch in ['amd64', 'x86_64'] %}
+  {%- set target_arch = 'amd64' %}
+{%- elif raw_cpu_arch in ['arm64', 'aarch64'] %}
+  {%- set target_arch = 'arm64' %}
+{%- endif %}
 alloy-package-install-pkg-installed:
   pkg.installed:
     - name: {{ alloy.pkg.name }}
-  {%- endif %}
-{{ debug_dump(locals()) }}
+
 
 {%- elif os_family in ['FreeBSD'] %}
   {%- if arch in ['amd64'] %}
