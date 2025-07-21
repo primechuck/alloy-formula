@@ -13,9 +13,11 @@
 ---
 values:
   repo:
-    keyring_path: '/etc/apt/keyrings/grafana.gpg'
+    signed_by: '/etc/apt/keyrings/grafana.gpg'
     file: '/etc/apt/sources.list.d/grafana.list'
-    line: 'https://apt.grafana.com stable main'
+    uri: 'https://apt.grafana.com'
+    dist: 'stable'
+    comps: 'main'
     key_url: 'https://apt.grafana.com/gpg.key'
     key_source_hash: 'sha256=58052c148058ace26dbd01ce057afa5709fb9d39c8a8ab16800be3f42fc02ab2'
 ...

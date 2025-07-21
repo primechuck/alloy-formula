@@ -6,14 +6,16 @@
 {%- set sls_config_clean = tplroot ~ '.config.clean' %}
 {%- from tplroot ~ "/map.jinja" import mapdata as alloy with context %}
 
+{%- set os_family = salt['grains.get']('os_family') %}
+
 include:
   - {{ sls_config_clean }}
 
 alloy-repo-installed:
   pkgrepo.absent:
-    {% if salt['grains.get']('os_family') == 'Debian' %}
-    - name: {{ alloy.repo.line }}
-    {% elif salt['grains.get']('os_family') in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
+    {% if os_family == 'Debian' %}
+    - name: deb [arch={{ alloy.osarch }} signed-by={{ alloy.repo.signed_by }}] {{ alloy.repo.uri }} {{ alloy.repo.dist }} {{ alloy.repo.comps }}
+    {% elif os_family in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
     - name: {{ alloy.repo.file }}
     {% endif %}
     - require:
