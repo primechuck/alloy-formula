@@ -17,11 +17,11 @@ values:
     use_upstream_repo: true
     repo:
       humanname: Grafana repo for Alloy and Grafana
-      signed_by: /usr/share/keyrings/grafana.key
+      signed_by: /etc/apt/keyrings/grafana.gpg
       url: https://apt.grafana.com stable main
       file: /etc/apt/sources.list.d/grafana.list
       key_url: https://apt.grafana.com/gpg-full.key
-      key_path: /usr/share/keyrings/grafana.key
+      key_path: /etc/apt/keyrings/grafana.gpg
   config_file: /etc/alloy/config.alloy
   service:
     name: alloy
