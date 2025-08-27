@@ -90,7 +90,7 @@ We create a configuration for the DNS domain ``example.net`` in ``/srv/salt/allo
 
     ---
     values:
-      config: /etc/alloy-example-net.conf
+      config_file: /etc/alloy-example-net.conf
     ...
 
 We create another configuration for the DNS domain ``example.com`` in the Jinja YAML template ``/srv/salt/alloy/parameters/dns:domain/example.com.yaml.jinja``:
@@ -99,7 +99,7 @@ We create another configuration for the DNS domain ``example.com`` in the Jinja 
 
     ---
     values:
-      config: /etc/alloy-{{ grains['os_family'] }}.conf
+      config_file: /etc/alloy-{{ grains['os_family'] }}.conf
     ...
 
 
@@ -125,7 +125,7 @@ We create a configuration for the role ``alloy/server`` in ``/srv/salt/alloy/par
 
     ---
     values:
-      config: /etc/alloy-server.conf
+      config_file: /etc/alloy-server.conf
     ...
 
 We create another configuration for the role ``alloy/client`` in ``/srv/salt/alloy/parameters/roles/alloy/client.yaml``:
@@ -134,7 +134,7 @@ We create another configuration for the role ``alloy/client`` in ``/srv/salt/all
 
     ---
     values:
-      config: /etc/alloy-client.conf
+      config_file: /etc/alloy-client.conf
     ...
 
 
@@ -197,48 +197,6 @@ For the clients:
 
     Since we used ``Y:C@roles``, ``map.jinja`` will do a ``salt['config.get']('roles')`` to retrieve the roles so you could use any other method to bind roles to minions (`pillars`_ or `SDB`_) but `grains`_ seems to be the preferred method.
 
-Note for Microsoft Windows systems
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you have a minion running under windows, you can't use colon ``:`` as a delimiter for grain path query (see `bug 58726`_) in which case you should use an alternate delimiter:
-
-Modify ``/srv/salt/parameters/map_jinja.yaml`` to change the query for ``dns:domain`` to define the `alternate delimiter`_:
-
-.. code-block:: yaml
-
-    ---
-    values:
-      sources:
-        # default values
-        - "Y:G@osarch"
-        - "Y:G@os_family"
-        - "Y:G@os"
-        - "Y:G@osfinger"
-        - "C@{{ tplroot ~ ':lookup' }}"
-        - "C@{{ tplroot }}"
-
-        # Roles activate/deactivate things
-        # then thing are configured depending on environment
-        # So roles comes before `dns:domain`, `domain` and `id`
-        - "Y:C@roles"
-
-        # DNS domain configured (DHCP or resolv.conf)
-        - "Y:G:!@dns!domain"
-
-        # Based on minion ID
-        - "Y:G@domain"
-
-        # default values
-        - "Y:G@id"
-    ...
-
-And then, rename the directory:
-
-.. code-block:: console
-
-    mv /srv/salt/alloy/parameters/dns:domain/  '/srv/salt/alloy/parameters/dns!domain/'
-
-
 Format of configuration YAML files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -260,7 +218,7 @@ Here is a valid example:
     values:
       pkg:
         name: 'some-package'
-      config: '/path/to/a/configuration/file'
+      config_file: '/path/to/a/configuration/file'
     ...
 
 
@@ -344,6 +302,7 @@ The built-in ``map.jinja`` sources are:
 
 .. code-block:: yaml
 
+    - "Y@defaults"
     - "Y:G@osarch"
     - "Y:G@os_family"
     - "Y:G@os"
@@ -358,6 +317,8 @@ This is strictly equivalent to the following ``map_jinja.yaml.jinja``:
 
     values:
       sources:
+        - "parameters/defaults.yaml"
+        - "parameters/defaults.yaml.jinja"
         - "parameters/osarch/{{ salt['grains.get']('osarch') }}.yaml"
         - "parameters/osarch/{{ salt['grains.get']('osarch') }}.yaml.jinja"
         - "parameters/os_family/{{ salt['grains.get']('os_family') }}.yaml"
@@ -441,7 +402,7 @@ Dependencies
 ``map.jinja`` requires:
 
 - salt minion 2018.3.3 minimum to use the `traverse`_ jinja filter
-- to be located at the root of the formula named directory (e.g. ``libvirt-formula/libvirt/map.jinja``)
+- to be located at the root of the formula named directory (e.g. ``alloy-formula/alloy/map.jinja``)
 - the ``libsaltcli.jinja`` library, stored in the same directory, to disable the ``merge`` option of `salt['config.get']`_ over `salt-ssh`_
 - the ``libmapstack.jinja`` library to load the configuration values
 - the ``libmatchers.jinja`` library used by ``libmapstack.jinja`` to parse compound like matchers
@@ -488,7 +449,7 @@ Here is an example based on a formula's ``config.sls`` state file:
 
     alloy-config-file-file-managed:
       file.managed:
-        - name: {{ alloy.config }}
+        - name: {{ alloy.config_file }}
         - source: {{ files_switch(['example.tmpl'],
                                   lookup='alloy-config-file-file-managed'
                      )
