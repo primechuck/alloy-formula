@@ -18,11 +18,11 @@ alloy-repo-installed:
     - key_url: {{ alloy.pkg.repo.key_url }}
     - aptkey: False
     {% elif os_family in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
-    - humanname: {{ alloy.repo.humanname }}
-    - name: {{ alloy.repo.name }}
-    - file: {{ alloy.repo.file }}
-    - baseurl: {{ alloy.repo.baseurl }}
-    - gpgkey: {{ alloy.repo.gpgkey }}
+    - humanname: {{ alloy.pkg.repo.humanname }}
+    - name: {{ alloy.pkg.repo.name }}
+    - file: {{ alloy.pkg.repo.file }}
+    - baseurl: {{ alloy.pkg.repo.baseurl }}
+    - gpgkey: {{ alloy.pkg.repo.gpgkey }}
     - gpgcheck: 1
     - enabled: 1
     

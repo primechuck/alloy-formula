@@ -9,12 +9,13 @@ values:
     config_dir: /etc/alloy
   binary:
     name: alloy
-  user: root
   group: alloy
+  user: alloy
   pkg:
     name: alloy
     use_upstream_repo: true
     repo:
+      humanname: Grafana Repository
       name: grafana
       file: /etc/yum.repos.d/grafana.repo
       baseurl: https://rpm.grafana.com
