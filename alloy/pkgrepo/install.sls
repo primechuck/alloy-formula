@@ -11,10 +11,16 @@
 
 # deb [arch=amd64 signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main
 
+{% if os_family == 'FreeBSD' %}
+alloy-repo-not-managed-on-freebsd:
+  test.succeed_without_changes:
+    - comment: "Alloy formula (pkgrepo): No action taken on FreeBSD."
+
+{% else %}
 alloy-repo-installed:
   pkgrepo.managed:
     {% if os_family == 'Debian' %}
-    - name: deb [signed-by={{ alloy.pkg.repo.signed_by }}]  {{ alloy.pkg.repo.url }}
+    - name: deb [signed-by={{ alloy.pkg.repo.signed_by }}] {{ alloy.pkg.repo.url }}
     - key_url: {{ alloy.pkg.repo.key_url }}
     - aptkey: False
     {% elif os_family in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
@@ -25,7 +31,8 @@ alloy-repo-installed:
     - gpgkey: {{ alloy.pkg.repo.gpgkey }}
     - gpgcheck: 1
     - enabled: 1
-    
-  {%- else %}
-    {{- raise("Alloy formula (pkgrepo) is only supported on amd64/x86_64 and arm64/aarch64 Linux architectures. Current OS family: " ~ os_family ~ ", Current arch: " ~ raw_cpu_arch ~ ". Halting formula application for alloy.pkgrepo.") }}
-  {%- endif %}
+
+    {% else %}
+      {{- raise("Alloy formula (pkgrepo) is not supported on OS family '{}'. Halting formula application for alloy.pkgrepo.".format(os_family)) }}
+    {% endif %}
+{% endif %}

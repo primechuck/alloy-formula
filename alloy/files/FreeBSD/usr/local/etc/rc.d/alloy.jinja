@@ -37,9 +37,10 @@ load_rc_config $name
 pidfile=/var/run/alloy.pid
 command="/usr/sbin/daemon"
 procname="/usr/local/bin/alloy"
-run="run /usr/local/etc/alloy.flow"
+run="run /usr/local/etc/alloy/config.alloy"
 command_args="-S -T ${name} -p ${pidfile} /usr/bin/env ${procname} ${run} \
-    --storage.path=${alloy_storage_path} --server.http.listen-addr=${alloy_listen_address} ${alloy_args}"
+    --storage.path=${alloy_storage_path} ${alloy_args}"
+#    --storage.path=${alloy_storage_path} --server.http.listen-addr=${alloy_listen_address} ${alloy_args}"
 
 start_precmd=alloy_startprecmd
 

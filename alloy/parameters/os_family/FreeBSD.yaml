@@ -28,6 +28,6 @@ values:
     dl:
       base_url: https://github.com/grafana/alloy/releases/download/
       version_prefix: 'v1.9.1'
-      component_name: alloy-freebsd-{{ alloy.arch }}
+      component_name: alloy-freebsd-amd64
       archive_type: zip
       checksum: 'sha256=ab297815141f957fae7c143dc211bd79afac69b1381ec6b5eafc89dceb9394ef'
