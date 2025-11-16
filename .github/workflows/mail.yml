@@ -27,7 +27,7 @@ jobs:
     needs: should-run
     if: fromJSON(needs.should-run.outputs.should-run)
     container:
-      image: techneg/ci-pre-commit:v2.5.2
+      image: techneg/ci-pre-commit:v3.2.0
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -42,7 +42,7 @@ jobs:
           filter: tree:0
       - name: Export `CI_CACHE_ID` from container
         run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
-      - uses: actions/cache@v4.2.4
+      - uses: actions/cache@v4.3.1
         with:
           path: ~/.cache/pre-commit
           key: >-
@@ -81,11 +81,11 @@ jobs:
     steps:
       - name: Debug on runner (When re-run with "Enable debug logging" checked)
         if: runner.debug
-        uses: mxschmitt/action-tmate@v3.22
+        uses: mxschmitt/action-tmate@v3.23
         with:
           detached: true
-      - uses: actions/checkout@v5.0.0
-      - uses: ruby/setup-ruby@v1.255.0
+      - uses: actions/checkout@v6.0.0
+      - uses: ruby/setup-ruby@v1.289.0
         with:
           bundler-cache: true
           ruby-version: '3.1'
@@ -99,7 +99,7 @@ jobs:
       pull-requests: write
       checks: read
     container:
-      image: techneg/ci-semantic-release:v1.2.1
+      image: techneg/ci-semantic-release:v2.0.0
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -107,8 +107,8 @@ jobs:
         run: |
           # Needed due to bug actions/checkout#2031
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - uses: actions/checkout@v5.0.0
-      - uses: poseidon/wait-for-status-checks@v0.6.0  # yamllint disable-line rule:line-length
+      - uses: actions/checkout@v6.0.0
+      - uses: techneg-it/wait-for-status-checks@v0.7.0  # yamllint disable-line rule:line-length
         with:
           ignore: >
             Release / Collect results,

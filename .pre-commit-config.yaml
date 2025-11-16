@@ -16,27 +16,20 @@ ci:
   skip: []
   submodules: false
 repos:
-  - repo: https://github.com/dafyddj/commitlint-pre-commit-hook
-    rev: v2.3.0
+  - repo: https://github.com/dafyddj/mirrors-commitlint
+    rev: v19.8.1
     hooks:
       - id: commitlint
-        name: Check commit message using commitlint
-        description: Lint commit message against @commitlint/config-conventional rules
-        stages: [commit-msg]
-        additional_dependencies: ['@commitlint/config-conventional@8.3.4']
-      - id: commitlint-travis
-        stages: [manual]
-        additional_dependencies: ['@commitlint/config-conventional@8.3.4']
-        always_run: true
+      - id: commitlint-ci
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.8.0.4
+    rev: v0.9.0.6
     hooks:
       - id: shellcheck
         name: Check shell scripts with shellcheck
         files: ^.*\.(sh|bash|ksh)$
         types: []
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.26.3
+    rev: v1.37.1
     hooks:
       - id: yamllint
         name: Check YAML syntax with yamllint
