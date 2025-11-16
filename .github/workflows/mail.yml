@@ -20,7 +20,7 @@ jobs:
       should-run: ${{ steps.action.outputs.should-run }}
     steps:
       - id: action
-        uses: techneg-it/should-workflow-run@v1.0.1 # yamllint disable-line rule:line-length
+        uses: techneg-it/should-workflow-run@v1.0.1  # yamllint disable-line rule:line-length
 
   pre-commit:
     name: Lint / `pre-commit`
@@ -108,7 +108,7 @@ jobs:
           # Needed due to bug actions/checkout#2031
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/checkout@v5.0.0
-      - uses: poseidon/wait-for-status-checks@v0.6.0 # yamllint disable-line rule:line-length
+      - uses: poseidon/wait-for-status-checks@v0.6.0  # yamllint disable-line rule:line-length
         with:
           ignore: >
             Release / Collect results,

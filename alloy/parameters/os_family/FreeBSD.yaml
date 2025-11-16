@@ -4,30 +4,29 @@
 # FreeBSD-specific default values for the Alloy formula.
 ---
 values:
-
-    paths:
-      install_dir: /usr/local/bin
-      config_dir: /usr/local/etc/alloy
-    binary:
-      name: alloy
-    user: root
-    group: wheel
-    pkg:
-      name: alloy
-      use_upstream_repo: false
-    config_file: /usr/local/etc/alloy/config.alloy
-    service:
-      name: alloy
-      enable: true
-      settings:
-        alloy_enable: true
-        alloy_user: nobody
-        alloy_group: nobody
-        alloy_listen_address: :9200
-        alloy_storage_path: /usr/local/var/alloy
-    dl:
-      base_url: https://github.com/grafana/alloy/releases/download/
-      version_prefix: 'v1.9.1'
-      component_name: alloy-freebsd-amd64
-      archive_type: zip
-      checksum: 'sha256=ab297815141f957fae7c143dc211bd79afac69b1381ec6b5eafc89dceb9394ef'
+  paths:
+    install_dir: /usr/local/bin
+    config_dir: /usr/local/etc/alloy
+  binary:
+    name: alloy
+  user: root
+  group: wheel
+  pkg:
+    name: alloy
+    use_upstream_repo: false
+  config_file: /usr/local/etc/alloy/config.alloy
+  service:
+    name: alloy
+    enable: true
+    settings:
+      alloy_enable: true
+      alloy_user: nobody
+      alloy_group: nobody
+      alloy_listen_address: :9200
+      alloy_storage_path: /usr/local/var/alloy
+  dl:
+    base_url: https://github.com/grafana/alloy/releases/download/
+    version_prefix: "v1.9.1"
+    component_name: alloy-freebsd-amd64
+    archive_type: zip
+    checksum: "sha256=ab297815141f957fae7c143dc211bd79afac69b1381ec6b5eafc89dceb9394ef"

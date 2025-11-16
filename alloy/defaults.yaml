@@ -1,5 +1,5 @@
 # Default values for the alloy formula
-
+---
 alloy:
   # Default to a package-based installation
   install_method: package
