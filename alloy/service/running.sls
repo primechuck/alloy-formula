@@ -12,7 +12,7 @@
 include:
   - {{ sls_config_file }}
 
-{% if os_family in ['RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
+{% if os_family in ['Debian', 'RedHat', 'Fedora', 'Oracle', 'SUSE'] %}
 
 alloy-service-running-service-running:
   service.running:

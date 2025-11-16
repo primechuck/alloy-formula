@@ -2,31 +2,46 @@
 # File managed by Salt at <{{ source }}>.
 # Your changes will be overwritten.
 ########################################################################
+{%- set alloy = alloy | fromjson %}
+{%- set cfg = alloy.get('config', {}) %}
 
-// Sample config for Alloy.
-//
-// For a full configuration reference, see https://grafana.com/docs/alloy
+{%- if cfg.logging is defined %}
 logging {
-  level = "warn"
+  {%- if cfg.logging.level is defined %}
+  level = "{{ cfg.logging.level }}"
+  {%- endif %}
+  {%- if cfg.logging.format is defined %}
+  format = "{{ cfg.logging.format }}"
+  {%- endif %}
 }
+{%- endif %}
 
-prometheus.exporter.unix "default" {
-  include_exporter_metrics = true
-  disable_collectors       = ["mdadm"]
+{%- for name, exporter in (cfg.exporters | default({})).items() %}
+prometheus.exporter.{{ exporter.type }} "{{ name }}" {
+  {%- for key, value in exporter.settings.items() %}
+  {{ key }} = {{ value | tojson }}
+  {%- endfor %}
 }
+{%- endfor %}
 
-prometheus.scrape "default" {
-  targets = array.concat(
-    prometheus.exporter.unix.default.targets,
-    [{
-      // Self-collect metrics
-      job         = "alloy",
-      __address__ = "127.0.0.1:12345",
-    }],
-  )
-
-  forward_to = [
-  // TODO: components to forward metrics to (like prometheus.remote_write or
-  // prometheus.relabel).
-  ]
+{%- for name, scrape in (cfg.scrapes | default({})).items() %}
+prometheus.scrape "{{ name }}" {
+  targets = {{ scrape.targets | tojson }}
+  forward_to = {{ scrape.forward_to | tojson }}
 }
+{%- endfor %}
+
+{%- for name, remote_write in (cfg.remote_writes | default({})).items() %}
+prometheus.remote_write "{{ name }}" {
+  endpoint {
+    url = "{{ remote_write.url }}"
+    {%- if remote_write.headers is defined %}
+    headers = {
+      {%- for key, value in remote_write.headers.items() %}
+      "{{ key }}" = "{{ value }}",
+      {%- endfor %}
+    }
+    {%- endif %}
+  }
+}
+{%- endfor %}
