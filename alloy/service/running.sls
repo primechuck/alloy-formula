@@ -18,8 +18,10 @@ alloy-service-running-service-running:
   service.running:
     - name: {{ alloy.service.name }}
     - enable: True
+    - require:
+      - pkg: alloy-package-install-pkg-installed
     - watch:
-      - sls: {{ sls_config_file }}
+      - file: alloy-config-file-file-managed
 
 {% elif grains.os_family == 'FreeBSD' %}
 
