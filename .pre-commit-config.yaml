@@ -49,3 +49,4 @@ repos:
       - id: salt-lint
         name: Check Salt files using salt-lint
         files: ^.*\.(sls|jinja|j2|tmpl|tst)$
+
