@@ -42,7 +42,7 @@ jobs:
           filter: tree:0
       - name: Export `CI_CACHE_ID` from container
         run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
-      - uses: actions/cache@v4.3.1
+      - uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: >-
@@ -85,7 +85,7 @@ jobs:
         with:
           detached: true
       - uses: actions/checkout@v5.0.0
-      - uses: ruby/setup-ruby@v1.289.0
+      - uses: ruby/setup-ruby@v1.267.0
         with:
           bundler-cache: true
           ruby-version: '3.1'
