@@ -1,6 +1,6 @@
 name: alloy
-os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Amazon, Oracle, SUSE, openSUSE, FreeBSD
-os_family: Debian, RedHat, SUSE, FreeBSD
+os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Amazon, Oracle, SUSE, openSUSE
+os_family: Debian, RedHat, SUSE
 version: 1.0.0
 release: 1
 minimum_version: 2019.2

@@ -6,6 +6,17 @@
 values:
   pkg:
     name: alloy
+    repo:
+      # Debian/Ubuntu
+      signed_by: /etc/apt/keyrings/grafana.gpg
+      key_url: https://apt.grafana.com/gpg.key
+      url: https://apt.grafana.com stable main
+      # RedHat/CentOS/Fedora/SUSE
+      humanname: Grafana
+      name: grafana
+      file: /etc/yum.repos.d/grafana.repo
+      baseurl: https://rpm.grafana.com
+      gpgkey: https://rpm.grafana.com/gpg.key
   service:
     name: alloy
   user: alloy
