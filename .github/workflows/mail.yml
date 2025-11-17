@@ -100,8 +100,6 @@ jobs:
       issues: write
       pull-requests: write
       checks: read
-    container:
-      image: techneg/ci-semantic-release:v2.0.0
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -120,9 +118,16 @@ jobs:
             Test / Kitchen (ubuntu-2004-master)
           ignore_pattern: ^GitLab CI
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install semantic-release
+        run: |
+          npm install --no-audit --no-fund semantic-release@latest --no-save
       - name: Run `semantic-release`
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAINTAINER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: semantic-release --dry-run
+        run: npx semantic-release --dry-run
       - run: echo "::notice ::Workflow success!"
