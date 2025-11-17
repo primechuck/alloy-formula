@@ -1,6 +1,6 @@
 module.exports = {
   branch: 'master',
-  repositoryUrl: 'https://github.com/saltstack-formulas/alloy-formula',
+  repositoryUrl: 'https://github.com/primechuck/alloy-formula',
   plugins: [
       ['@semantic-release/commit-analyzer', {
         preset: 'angular',
