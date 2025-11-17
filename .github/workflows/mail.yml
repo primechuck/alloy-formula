@@ -19,8 +19,12 @@ jobs:
     outputs:
       should-run: ${{ steps.action.outputs.should-run }}
     steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
       - id: action
-        uses: techneg-it/should-workflow-run@v1.0.1  # yamllint disable-line rule:line-length
+        uses: techneg-it/should-workflow-run@v1.0.1
 
   pre-commit:
     name: Lint / `pre-commit`
@@ -88,14 +92,6 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/checkout@v5.0.0
         with:
-          ignore: >
-            Release / Collect results,
-            Test / Kitchen (debian-12-master),
-            Test / Kitchen (debian-11-master),
-            Test / Kitchen (ubuntu-2404-master),
-            Test / Kitchen (ubuntu-2204-master),
-            Test / Kitchen (ubuntu-2004-master)
-          ignore_pattern: ^GitLab CI
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Node
         uses: actions/setup-node@v4
